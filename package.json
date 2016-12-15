@@ -1,0 +1,11 @@
+{
+  "name": "serverlearn",
+  "version": "1.0.0",
+  "description": "This is a project to help me learn server side stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Liang",
+  "license": "ISC"
+}
