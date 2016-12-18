@@ -4,7 +4,7 @@ var app = express();
 var server = app.listen(3000, listening);
 
 function listening() {
-    console.log('Listening');
+    console.log('Listening...');
 }
 
 app.use(express.static('public'));
