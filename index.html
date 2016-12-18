@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>wikipedia API</title>
+    <!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <!--shell for wikipedia app-->
+    <!-- also use http://codepen.io/jon6/pen/WGgkOR?editors=1111 to view this-->
+    <div id="heading" class="text-center">
+        <h1 class="main-font">Tasks</h1>
+    </div>
+
+    <form id=searchForm class="form-inline">
+        <div class="text-center">
+            <input id="searchString" class="form-control" type="text" placeholder="Enter an Article Title" />
+            <button id="search" type="submit" class="btn btn-default">Search</button>
+        </div>
+    </form>
+
+    <div class="container-fluid" id="resultList">
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>
