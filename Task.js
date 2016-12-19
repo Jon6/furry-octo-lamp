@@ -9,12 +9,14 @@ function listening() {
     console.log('Listening...');
 }
 
-//to be expanded upon
+// host static directory with webpage in it that is interface to app
 app.use(express.static('public'));
 
+// begining of API which gives listed stuffin DB
 app.get('/getTasks/:taskNum', returnTasks);
 
 function returnTasks(request, response) {
+    console.log('Tasked!');
     if (request.params.taskNum !== null) {
         response.send(tasks[taskNum]);
     } else {
