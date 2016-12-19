@@ -13,13 +13,20 @@ function listening() {
 app.use(express.static('public'));
 
 // begining of API which gives listed stuffin DB
-app.get('/getTasks/:taskNum', returnTasks);
+app.get('/getTasks/:taskNum?/', returnTasks);
 
 function returnTasks(request, response) {
-    console.log('Tasked!');
-    if (request.params.taskNum !== null) {
-        response.send(tasks[taskNum]);
+    if (request.params.taskNum !== undefined) {
+        response.send(tasks[request.params.taskNum]);
     } else {
         response.send(tasks);
     }
+}
+
+// simple adding from variable in string
+app.get('/addTask/:newTask/', addTask);
+
+function addTask(request, response) {
+    tasks.push(request.params.newTask);
+    response.send({ newTask: request.params.newTask, status: 'success' });
 }
