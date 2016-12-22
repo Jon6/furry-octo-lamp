@@ -9,9 +9,13 @@ $(document).ready(function() {
 });
 
 function sendTask() {
-  var taskStringURL = '/addTask/' + encodeURI($('#taskString').val());
-  console.log(taskStringURL);
-  $.getJSON(taskStringURL, function(data) {
+  // var taskStringURL = '/addTask/' + encodeURI($('#taskString').val());
+  // console.log($('#taskString').val());
+  // $.getJSON(taskStringURL, function(data) {
+  //   console.log(data);
+  // });
+  var taskString = $('#taskString').val();
+  $.post('/postTask/', { text: taskString }, function(data) {
     console.log(data);
   });
 }
