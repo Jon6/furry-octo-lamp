@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   // when form is submitted, send task to add to list
   $('#addTaskForm').submit(function(e) {
     // used to prevent reloading
@@ -8,7 +9,9 @@ $(document).ready(function() {
 
   // load tasks that are in json file with getJSON
   $.getJSON('/getTasks/', function (data){
-    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      $('#main-container').append('<div>' + data[i] + '</div>');
+    }
   });
 });
 
