@@ -1,3 +1,5 @@
+var btstrpTrash = 'col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2';
+
 $(document).ready(function() {
 
   // when form is submitted, send task to add to list
@@ -10,7 +12,8 @@ $(document).ready(function() {
   // load tasks that are in json file with getJSON
   $.getJSON('/getTasks/', function (data){
     for (var i = 0; i < data.length; i++) {
-      $('#main-container').append('<div>' + data[i] + '</div>');
+      // $('#main-container').append('<div><p>' + data[i] + '</p></div>');
+      $('<div><p class="main-font">- ' + data[i] + '</p></div>').addClass(btstrpTrash).appendTo('#main-container');
     }
   });
 });
