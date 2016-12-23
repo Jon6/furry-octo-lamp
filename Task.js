@@ -47,11 +47,13 @@ function addTask(request, response) {
   });
 }
 
+
+// adding with post method
 app.post('/postTask', postTask);
 
 function postTask(request, response) {
   console.log(request.body);
-  tasks.push(Object.keys(request.body));
+  tasks.push(request.body.text);
   fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
     response.send({ newTask: request.body, status: 'success' });
   });

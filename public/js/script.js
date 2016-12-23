@@ -1,10 +1,14 @@
 $(document).ready(function() {
-  // when form is submitted, send task to add to file
-  console.log('ready');
+  // when form is submitted, send task to add to list
   $('#addTaskForm').submit(function(e) {
-    e.preventDefault();
-    console.log('about to send');
+    // used to prevent reloading
+    // e.preventDefault();
     sendTask();
+  });
+
+  // load tasks that are in json file with getJSON
+  $.getJSON('/getTasks/', function (data){
+    console.log(data);
   });
 });
 
