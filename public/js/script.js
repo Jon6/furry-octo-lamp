@@ -1,4 +1,5 @@
 var btstrpClasses = 'col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2';
+var deleteBtn = '<button type="button" class="btn btn-default btn-xs delete-task"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
 
 $(document).ready(function() {
 
@@ -18,6 +19,7 @@ $(document).ready(function() {
   });
 });
 
+
 function sendTask() {
   // send to API to add to file and add to DOM so reloading isn't necessary
   var taskString = $('#taskString').val();
@@ -28,6 +30,7 @@ function sendTask() {
   $('#taskString').val(""); // clear input
 }
 
+
 function addToMain(str) {
-  $('<div><p class="main-font">- ' + str + '</p></div>').addClass(btstrpClasses).appendTo('#main-container');
+  $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
 }

@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+
+
 // begining of API which gives listed stuffin DB
 app.get('/getTasks/:taskNum?/', returnTasks);
 
