@@ -15,14 +15,24 @@
 </head>
 
 <body>
-  <!-- figure out where to put col-xxxx classes in this so they aren't on every div -->
+    <!-- figure out where to put col-xxxx classes in this so they aren't on every div -->
     <div class="container-fluid">
         <div id="heading" class="text-center row">
             <h1 class="main-font">My Tasks</h1>
         </div>
+        <div class="row">
+            <div id="main-container" class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <table class="table main-font">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-table-body">
 
-        <div id="main-container" class="row">
-
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row">
             <form id=addTaskForm class="form-inline">

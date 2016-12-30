@@ -14,7 +14,7 @@ $(document).ready(function() {
   $.getJSON('/getTasks/', function(data) {
     for (var i = 0; i < data.length; i++) {
       // $('#main-container').append('<div><p>' + data[i] + '</p></div>');
-      addToMain(data[i]);
+      addToTable(data[i]);
     }
   });
 });
@@ -33,4 +33,8 @@ function sendTask() {
 
 function addToMain(str) {
   $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
+}
+
+function addToTable(str) {
+  $('<tr><td class="second-font">- ' + str + '</td></tr>').appendTo('#task-table-body');
 }
