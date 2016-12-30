@@ -26,15 +26,14 @@ function sendTask() {
   $.post('/postTask/', { text: taskString }, function(data) {
     console.log(data);
   });
-  addToMain(taskString);
+  addToTable(taskString);
   $('#taskString').val(""); // clear input
 }
 
-
-function addToMain(str) {
-  $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
-}
-
 function addToTable(str) {
-  $('<tr><td class="second-font">- ' + str + '</td></tr>').appendTo('#task-table-body');
+  $('<tr><td class="second-font">- ' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
 }
+
+// function addToMain(str) {  // old deprecated version of addToTable
+//   $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
+// }

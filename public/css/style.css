@@ -1,20 +1,18 @@
 .main-font {
-    font-family: 'Droid Serif', serif;
-    font-weight: bold;
+  font-family: 'Droid Serif', serif;
+  font-weight: bold;
 }
 
 .second-font {
   font-family: Roboto, sans-serif;
 }
 
-
-
 h1 {
-    font-size: 2.5em;
+  font-size: 2.5em;
 }
 
 p.main-font {
-    display: inline;
+  display: inline;
 }
 
 .delete-task {
