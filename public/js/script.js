@@ -31,8 +31,10 @@ function sendTask() {
 }
 
 function addToTable(str) {
-  $('<tr><td class="second-font">- ' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
+  $('<tr><td class="second-font"> ' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
 }
+
+
 
 // function addToMain(str) {  // old deprecated version of addToTable
 //   $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
