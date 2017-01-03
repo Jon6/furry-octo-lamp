@@ -3,8 +3,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 // load file using fs package
-var data = fs.readFileSync('taskList.json');
-var tasks = JSON.parse(data);
+var tasks = JSON.parse(fs.readFileSync('taskList.json'));
 
 
 // start express server
@@ -27,26 +26,11 @@ app.use(bodyParser.json());
 
 
 
-// begining of API which gives listed stuffin DB
-app.get('/getTasks/:taskNum?/', returnTasks);
+// begining of API which gives listed stuffin 'DB'
+app.get('/getTasks/', returnTasks);
 
 function returnTasks(request, response) {
-  if (request.params.taskNum !== undefined) {
-    response.send(tasks[request.params.taskNum]);
-  } else {
-    response.send(tasks);
-  }
-}
-
-
-// simple adding from variable in string
-app.get('/addTask/:newTask/', addTask);
-
-function addTask(request, response) {
-  tasks.push(decodeURI(request.params.newTask));
-  fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
-    response.send({ newTask: request.params.newTask, status: 'success' });
-  });
+  response.send(tasks);
 }
 
 
@@ -55,8 +39,22 @@ app.post('/postTask', postTask);
 
 function postTask(request, response) {
   console.log(request.body);
-  tasks.push(request.body.text);
+  var key = Object.keys(request.body);
+  console.log(key, key[0]);
+  tasks[key] = request.body.key[0];
   fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
     response.send({ newTask: request.body, status: 'success' });
+  });
+}
+
+
+
+// simple adding from variable in string - Not used by script.js anymore
+app.get('/addTask/:newTask/', addTask);
+
+function addTask(request, response) {
+  tasks.push(decodeURI(request.params.newTask));
+  fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
+    response.send({ newTask: request.params.newTask, status: 'success' });
   });
 }

@@ -3,27 +3,32 @@ var deleteBtn = '<button type="button" class="btn btn-default btn-xs delete-task
 
 $(document).ready(function() {
 
+  // load tasks that are in json file with getJSON
+  $.getJSON('/getTasks/', function(data) {
+    var taskArray = Object.keys(data);
+    for (var i = 0; i < taskArray.length; i++) {
+      addToTable(taskArray[i]);
+    }
+  });
+
   // when form is submitted, send task to add to list
   $('#addTaskForm').submit(function(e) {
     // used to prevent reloading
     e.preventDefault();
-    sendTask();
-  });
 
-  // load tasks that are in json file with getJSON
-  $.getJSON('/getTasks/', function(data) {
-    for (var i = 0; i < data.length; i++) {
-      // $('#main-container').append('<div><p>' + data[i] + '</p></div>');
-      addToTable(data[i]);
+    var taskString = $('#taskString').val();
+    if (taskString !== "") {
+      sendTask(taskString);
     }
   });
 });
 
 
-function sendTask() {
+function sendTask(taskString) {
   // send to API to add to file and add to DOM so reloading isn't necessary
-  var taskString = $('#taskString').val();
-  $.post('/postTask/', { text: taskString }, function(data) {
+  var params = {};
+  params[taskString] = 'open';
+  $.post('/postTask/', params, function(data) {
     console.log(data);
   });
   addToTable(taskString);
@@ -31,7 +36,7 @@ function sendTask() {
 }
 
 function addToTable(str) {
-  $('<tr><td class="second-font">- ' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
+  $('<tr><td class="second-font">' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
 }
 
 // function addToMain(str) {  // old deprecated version of addToTable
