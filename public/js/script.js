@@ -5,9 +5,10 @@ $(document).ready(function() {
 
   // load tasks that are in json file with getJSON
   $.getJSON('/getTasks/', function(data) {
-    var taskArray = Object.keys(data);
-    for (var i = 0; i < taskArray.length; i++) {
-      addToTable(taskArray[i]);
+    for (var key in data) {
+      if (data.hasOwnProperty(key) && data[key] === 'open') {
+        addToTable(key);
+      }
     }
   });
 
@@ -26,9 +27,7 @@ $(document).ready(function() {
 
 function sendTask(taskString) {
   // send to API to add to file and add to DOM so reloading isn't necessary
-  var params = {};
-  params[taskString] = 'open';
-  $.post('/postTask/', params, function(data) {
+  $.post('/postTask/', { task: taskString, status: 'open' }, function(data) {
     console.log(data);
   });
   addToTable(taskString);
@@ -38,7 +37,3 @@ function sendTask(taskString) {
 function addToTable(str) {
   $('<tr><td class="second-font">' + str + '</td><td>' + deleteBtn + '</td></tr>').appendTo('#task-table-body');
 }
-
-// function addToMain(str) {  // old deprecated version of addToTable
-//   $('<div><p class="main-font">- ' + str + '</p>' + deleteBtn + '</div>').addClass(btstrpClasses).appendTo('#main-container');
-// }

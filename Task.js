@@ -38,10 +38,7 @@ function returnTasks(request, response) {
 app.post('/postTask', postTask);
 
 function postTask(request, response) {
-  console.log(request.body);
-  var key = Object.keys(request.body);
-  console.log(key, key[0]);
-  tasks[key] = request.body.key[0];
+  tasks[request.body.task] = request.body.status;
   fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
     response.send({ newTask: request.body, status: 'success' });
   });
