@@ -38,10 +38,14 @@ function returnTasks(request, response) {
 app.post('/postTask', postTask);
 
 function postTask(request, response) {
-  tasks[request.body.task] = request.body.status;
-  fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
-    response.send({ newTask: request.body, status: 'success' });
-  });
+  if (tasks[request.body.task] === 'open') {
+    response.send({ newTask: request.body, status: 'duplicate' })
+  } else {
+    tasks[request.body.task] = request.body.status;
+    fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
+      response.send({ newTask: request.body, status: 'success' });
+    });
+  }
 }
 
 

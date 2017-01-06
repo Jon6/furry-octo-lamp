@@ -29,9 +29,12 @@ function sendTask(taskString) {
   // send to API to add to file and add to DOM so reloading isn't necessary
   $.post('/postTask/', { task: taskString, status: 'open' }, function(data) {
     console.log(data);
+    if (data.status !== 'duplicate') {
+      addToTable(taskString);
+    }
   });
-  addToTable(taskString);
-  $('#taskString').val(""); // clear input
+  // clear input
+  $('#taskString').val("");
 }
 
 function addToTable(str) {
