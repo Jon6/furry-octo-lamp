@@ -3,8 +3,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 // load file using fs package
-var data = fs.readFileSync('taskList.json');
-var tasks = JSON.parse(data);
+var tasks = JSON.parse(fs.readFileSync('taskList.json'));
 
 
 // start express server
@@ -27,26 +26,11 @@ app.use(bodyParser.json());
 
 
 
-// begining of API which gives listed stuffin DB
-app.get('/getTasks/:taskNum?/', returnTasks);
+// begining of API which gives listed stuffin 'DB'
+app.get('/getTasks/', returnTasks);
 
 function returnTasks(request, response) {
-  if (request.params.taskNum !== undefined) {
-    response.send(tasks[request.params.taskNum]);
-  } else {
-    response.send(tasks);
-  }
-}
-
-
-// simple adding from variable in string
-app.get('/addTask/:newTask/', addTask);
-
-function addTask(request, response) {
-  tasks.push(decodeURI(request.params.newTask));
-  fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
-    response.send({ newTask: request.params.newTask, status: 'success' });
-  });
+  response.send(tasks);
 }
 
 
@@ -54,9 +38,33 @@ function addTask(request, response) {
 app.post('/postTask', postTask);
 
 function postTask(request, response) {
-  console.log(request.body);
-  tasks.push(request.body.text);
+  if (tasks[request.body.task] === 'open') {
+    response.send({ newTask: request.body, status: 'duplicate' });
+  } else {
+    tasks[request.body.task] = request.body.status;
+    fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
+      response.send({ newTask: request.body, status: 'success' });
+    });
+  }
+}
+
+app.post('/closeTask', closeTask);
+
+function closeTask(request, response) {
+  if (tasks[request.body.task] !== null) {
+    tasks[request.body.task] = 'closed';
+    fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
+      response.send({ newTask: request.params.newTask, status: 'closed' });
+    });
+  }
+}
+
+// simple adding from variable in string - Not used by script.js anymore
+app.get('/addTask/:newTask/', addTask);
+
+function addTask(request, response) {
+  tasks.push(decodeURI(request.params.newTask));
   fs.writeFile('taskList.json', JSON.stringify(tasks, null, 2), function(err) {
-    response.send({ newTask: request.body, status: 'success' });
+    response.send({ newTask: request.params.newTask, status: 'success' });
   });
 }

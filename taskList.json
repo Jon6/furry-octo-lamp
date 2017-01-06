@@ -1,14 +1,9 @@
-[
-  "Eat something",
-  "Go to the Gym",
-  "not one word",
-  "Wake up early!",
-  "go to bed already",
-  "not one word",
-  "go to the gym again you lazy fuckboi",
-  "testing again",
-  "new task",
-  "Create a task that won't reload",
-  "clear input",
-  "a new task again"
-]
+
+{
+  "Starting from scratch": "open",
+  "nice": "closed",
+  "this": "closed",
+  "is": "closed",
+  "actually a thing": "open"
+}
+
