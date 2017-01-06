@@ -1,5 +1,5 @@
 var btstrpClasses = 'col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2';
-var deleteBtn = '<button type="button" class="btn btn-default btn-xs delete-task"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+var deleteBtn = '<button type="button" class="btn btn-default btn-xs close-task"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
 
 $(document).ready(function() {
 
@@ -21,6 +21,11 @@ $(document).ready(function() {
     if (taskString !== "") {
       sendTask(taskString);
     }
+  });
+
+  $('.close-task').on('click', function() {
+    console.log('clicked'); // Not working
+
   });
 });
 
