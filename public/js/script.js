@@ -23,9 +23,10 @@ $(document).ready(function() {
     }
   });
 
-  $('.close-task').on('click', function() {
-    console.log('clicked'); // Not working
-
+  // something about being added dynamically makes this necessary
+  $('#task-table-body').on('click', 'button.close-task', function() {
+    $(this).parent().parent().fadeOut(250);
+    closeTask($(this).parent().siblings('.second-font').html());
   });
 });
 
@@ -40,6 +41,13 @@ function sendTask(taskString) {
   });
   // clear input
   $('#taskString').val("");
+}
+
+function closeTask(taskString) {
+  // send to API to add to file and add to DOM so reloading isn't necessary
+  $.post('/closeTask/', { task: taskString, status: 'closed' }, function(data) {
+    console.log(data);
+  });
 }
 
 function addToTable(str) {
